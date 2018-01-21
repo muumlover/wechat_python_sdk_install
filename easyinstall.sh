@@ -41,7 +41,7 @@ echo "#############################################################"
 echo
 yum -y install epel-release
 yum -y install python34
-yum -y install python-devel.x86_64
+yum -y install python34-devel.x86_64
 
 echo
 echo "#############################################################"
