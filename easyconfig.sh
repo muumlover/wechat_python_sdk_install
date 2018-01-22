@@ -67,6 +67,8 @@ setup_wechat(){
     rm views.py 
     wget https://raw.githubusercontent.com/muumlover/wechat_python_sdk_install/master/views.py >/dev/null
     config_wechat
+    cd ..
+    start_wechat
 }
 
 # Config Wechat
@@ -79,7 +81,7 @@ config_wechat(){
     echo
     read -p "Please enter YOUR_APPSECRET :" YOUR_APPSECRET
     echo
-    read -p "Please enter YOUR_MODE :" YOUR_MODE
+    read -p "Please enter YOUR_MODE(normal/compatible/safe) :" YOUR_MODE
     echo
     read -p "Please enter YOUR_AES_KEY :" YOUR_AES_KEY
 
