@@ -15,8 +15,8 @@ install(){
     ./easyinstall.sh 2>&1 | tee easyinstall.log
 }
 
-# Config Wechat
-config(){
+# Setup Wechat
+setup(){
     # Set Project Name
     echo -e "Please enter a name for project:"
     read -p "(Default project name: project1):" PROJECT_NAME
@@ -32,18 +32,24 @@ config(){
     read -p "(Default host name: example.com):" HOST_NAME
     [ -z "${HOST_NAME}" ] && HOST_NAME="*"
 
-    django-admin.py startproject PROJECT_NAME
+    django-admin.py startproject ${PROJECT_NAME}
     cd PROJECT_NAME
-    python manage.py startapp APP_NAME
+    python manage.py startapp ${APP_NAME}
     python manage.py makemigrations
     python manage.py migrate
-
-    cat
+    
     sed -i "/urlpatterns = /ifrom ${APP_NAME} import views\n" ${PROJECT_NAME}/urls.py
     sed -i "/urlpatterns = /a\    path('wechat/', views.wechat_home)," ${PROJECT_NAME}/urls.py
     
     #config hostname
     sed -i "/ALLOWED_HOSTS = /cALLOWED_HOSTS = ['${HOST_NAME}']" ${PROJECT_NAME}/settings.py 
+    
+    #setup views.py
+    rm ${APP_NAME}/views.py 
+    wget https://raw.githubusercontent.com/muumlover/wechat_python_sdk_install/master/views.py ${APP_NAME}/views.py 
+}
+
+config(){
 }
 
 # Start Wechat
