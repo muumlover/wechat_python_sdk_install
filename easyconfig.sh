@@ -9,14 +9,14 @@ export PATH
 #=================================================================#
 
 # Install Wechat
-install(){
+install_wechat(){
     wget --no-check-certificate https://raw.githubusercontent.com/muumlover/wechat_python_sdk_install/master/easyinstall.sh
     chmod +x easyinstall.sh
     ./easyinstall.sh 2>&1 | tee easyinstall.log
 }
 
 # Setup Wechat
-setup(){
+setup_wechat(){
     # Set Project Name
     echo -e "Please enter a name for project:"
     read -p "(Default project name: project1):" PROJECT_NAME
@@ -50,8 +50,19 @@ setup(){
 }
 
 # Start Wechat
-start(){
+start_wechat(){
     sudo python manage.py runserver 0.0.0.0:80 &  
 }
 
-
+# Initialization step
+action=$1
+[ -z $1 ] && action=install
+case "$action" in
+    install|setup|start)
+        ${action}_wechat
+        ;;
+    *)
+        echo "Arguments error! [${action}]"
+        echo "Usage: `basename $0` [install|setup|start]"
+        ;;
+esac
