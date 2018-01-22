@@ -29,8 +29,8 @@ config(){
 
     # Set Host Name
     echo -e "Please enter a host name :"
-    read -p "(Default host name: ):" HOST_NAME
-    [ -z "${HOST_NAME}" ] && HOST_NAME=""
+    read -p "(Default host name: example.com):" HOST_NAME
+    [ -z "${HOST_NAME}" ] && HOST_NAME="*"
 
     django-admin.py startproject PROJECT_NAME
     cd PROJECT_NAME
@@ -43,6 +43,7 @@ config(){
     sed -i "/urlpatterns = /a\    path('wechat/', views.wechat_home)," ${PROJECT_NAME}/urls.py
     
     #config hostname
+    sed -i "/ALLOWED_HOSTS = /cALLOWED_HOSTS = ['${HOST_NAME}']" ${PROJECT_NAME}/settings.py 
 }
 
 # Start Wechat
