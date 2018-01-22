@@ -33,7 +33,7 @@ setup_wechat(){
     [ -z "${HOST_NAME}" ] && HOST_NAME="*"
 
     django-admin.py startproject ${PROJECT_NAME}
-    cd PROJECT_NAME
+    cd ${PROJECT_NAME}
     python manage.py startapp ${APP_NAME}
     python manage.py makemigrations
     python manage.py migrate
