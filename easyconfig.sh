@@ -49,9 +49,6 @@ setup(){
     wget https://raw.githubusercontent.com/muumlover/wechat_python_sdk_install/master/views.py ${APP_NAME}/views.py 
 }
 
-config(){
-}
-
 # Start Wechat
 start(){
     sudo python manage.py runserver 0.0.0.0:80 &  
