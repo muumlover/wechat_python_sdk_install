@@ -66,7 +66,28 @@ setup_wechat(){
     cd ${APP_NAME}
     rm views.py 
     wget https://raw.githubusercontent.com/muumlover/wechat_python_sdk_install/master/views.py >/dev/null
-    cd ..
+    config_wechat
+}
+
+# Config Wechat
+config_wechat(){
+
+    echo
+    read -p "Please enter YOUR_TOKEN_HERE :" YOUR_TOKEN_HERE
+    echo
+    read -p "Please enter YOUR_APPID :" YOUR_APPID
+    echo
+    read -p "Please enter YOUR_APPSECRET :" YOUR_APPSECRET
+    echo
+    read -p "Please enter YOUR_MODE :" YOUR_MODE
+    echo
+    read -p "Please enter YOUR_AES_KEY :" YOUR_AES_KEY
+
+    sed -i "/YOUR_TOKEN_HERE/c\        token='${YOUR_TOKEN_HERE}'," views.py 
+    sed -i "/YOUR_APPID/c\        appid='${YOUR_APPID}'," views.py 
+    sed -i "/YOUR_APPSECRET/c\        appsecret='${YOUR_APPSECRET}'," views.py 
+    sed -i "/YOUR_MODE/c\        encrypt_mode='${YOUR_MODE}'," views.py 
+    sed -i "/YOUR_AES_KEY/c\        encoding_aes_key='${YOUR_AES_KEY}'" views.py 
 }
 
 # Start Wechat
